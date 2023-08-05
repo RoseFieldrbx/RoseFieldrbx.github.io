@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equalizer with Logo</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Professional Template</title>
@@ -62,10 +65,75 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #555;
     }
+ body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f2f2f2;
+    }
 
+    .equalizer-container {
+      width: 300px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .equalizer-bar {
+      width: 10px;
+      height: 100px;
+      margin: 0 5px;
+      background-color: #007bff;
+      animation: equalizer-animation 1s infinite alternate;
+    }
+
+    @keyframes equalizer-animation {
+      0% {
+        height: 50px;
+      }
+      100% {
+        height: 100px;
+      }
+    }
+
+    .logo {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      z-index: 1;
+    }
+
+    /* Replace 'your-logo.png' with the path to your logo image */
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    }
   </style>
 </head>
 <body>
+ <div class="equalizer-container">
+    <div class="equalizer-bar"></div>
+    <div class="equalizer-bar"></div>
+    <div class="equalizer-bar"></div>
+    <div class="equalizer-bar"></div>
+    <div class="equalizer-bar"></div>
+  </div>
+
+  <div class="logo">
+    <!-- Replace 'your-logo.png' with the path to your logo image -->
+    <img src="your-logo.png" alt="Logo">
+  </div>
+  
+  
   <!-- Loading Screen -->
   <div class="loading-screen">
     <div class="loading-spinner"></div>
