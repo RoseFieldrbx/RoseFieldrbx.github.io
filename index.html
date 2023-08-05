@@ -7,6 +7,76 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Professional Template</title>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-time Equalizer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    /* Styles for the equalizer bars */
+    .equalizer-container {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .equalizer-bar {
+      width: 8px;
+      height: 50px;
+      margin: 0 2px;
+      background-color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Real-time Equalizer</h1>
+  <div class="equalizer-container">
+    <!-- Equalizer bars will be added here -->
+  </div>
+
+  <script>
+    // Use the p5.js setup function to create the canvas
+    function setup() {
+      createCanvas(windowWidth, 200);
+    }
+
+    // The draw loop is called continuously
+    function draw() {
+      // Clear the canvas
+      clear();
+
+      // Get the amplitude data from the audio input
+      let spectrum = fft.analyze();
+
+      // Draw the equalizer bars based on the amplitude data
+      for (let i = 0; i < spectrum.length; i++) {
+        let barHeight = map(spectrum[i], 0, 255, 0, height);
+        let barWidth = width / spectrum.length;
+        let x = i * barWidth;
+        let y = height - barHeight;
+        fill(0, 123, 255);
+        rect(x, y, barWidth, barHeight);
+      }
+    }
+
+    // Load and play the MP3 file using p5.js
+    function preload() {
+      sound = loadSound('your-audio-file.mp3', loaded);
+    }
+
+    function loaded() {
+      sound.play();
+    }
+
+    // Setup the Web Audio API for audio analysis
+    let fft;
+    function setup() {
+      createCanvas(600, 200);
+      fft = new p5.FFT();
+      sound.amp(0.2); // Adjust the volume of the audio
+    }
+  </script>
   <style>
     /* Loading Screen Styles */
     .loading-screen {
@@ -65,75 +135,12 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #555;
     }
- body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background-color: #f2f2f2;
-    }
 
-    .equalizer-container {
-      width: 300px;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .equalizer-bar {
-      width: 10px;
-      height: 100px;
-      margin: 0 5px;
-      background-color: #007bff;
-      animation: equalizer-animation 1s infinite alternate;
-    }
-
-    @keyframes equalizer-animation {
-      0% {
-        height: 50px;
-      }
-      100% {
-        height: 100px;
-      }
-    }
-
-    .logo {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      z-index: 1;
-    }
-
-    /* Replace 'your-logo.png' with the path to your logo image */
-    .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-    }
   </style>
 </head>
 <body>
- <div class="equalizer-container">
-    <div class="equalizer-bar"></div>
-    <div class="equalizer-bar"></div>
-    <div class="equalizer-bar"></div>
-    <div class="equalizer-bar"></div>
-    <div class="equalizer-bar"></div>
-  </div>
 
-  <div class="logo">
-    <!-- Replace 'your-logo.png' with the path to your logo image -->
-    <img src="your-logo.png" alt="Logo">
-  </div>
-  
-  
+   
   <!-- Loading Screen -->
   <div class="loading-screen">
     <div class="loading-spinner"></div>
